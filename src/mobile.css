@@ -1,0 +1,117 @@
+/*
+ * mobile.css — Mobile-first overrides for Openfoot Manager PWA
+ *
+ * Import this in App.css or main.tsx after the base Tailwind import.
+ * Strategy: all default styles target phones (≤640px).
+ * Desktop layout is restored with sm: / md: / lg: breakpoints.
+ */
+
+/* ── Safe area insets (notch / home indicator on iOS) ─────────────────── */
+:root {
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+}
+
+/* ── Touch target floor (WCAG 2.5.5: 44×44px minimum) ────────────────── */
+button,
+[role="button"],
+a,
+input[type="checkbox"],
+input[type="radio"],
+select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* ── Prevent iOS double-tap zoom on buttons ──────────────────────────── */
+button,
+a {
+  touch-action: manipulation;
+}
+
+/* ── Prevent text size adjustment after orientation change (iOS) ──────── */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* ── Sticky bottom nav (mobile only) ────────────────────────────────────
+   The DashboardSidebar becomes a bottom nav on mobile.
+   Add class "mobile-bottom-nav" to the sidebar container. */
+@media (max-width: 639px) {
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding-bottom: var(--safe-bottom);
+    border-top: 1px solid rgb(var(--color-border) / 0.3);
+    background: rgb(var(--color-surface));
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: calc(56px + var(--safe-bottom));
+  }
+
+  /* Push page content above the bottom nav */
+  .dashboard-content {
+    padding-bottom: calc(56px + var(--safe-bottom));
+  }
+
+  /* Collapse sidebar labels on mobile — show icons only */
+  .mobile-bottom-nav .nav-label {
+    display: none;
+  }
+
+  .mobile-bottom-nav .nav-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ── Scrollable tables / data grids on small screens ─────────────────── */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Card stack layout (replaces side-by-side grid on mobile) ─────────── */
+@media (max-width: 639px) {
+  .card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Full-width modals on mobile ──────────────────────────────────────── */
+@media (max-width: 639px) {
+  .modal-container {
+    margin: 0 !important;
+    border-radius: 1rem 1rem 0 0 !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+
+/* ── Match live ticker — horizontal scroll on mobile ─────────────────── */
+@media (max-width: 639px) {
+  .match-ticker {
+    flex-direction: column;
+  }
+
+  .match-pitch-view {
+    aspect-ratio: 3/4;
+  }
+}
+
+/* ── Prevent overscroll bounce showing white background ──────────────── */
+body {
+  overscroll-behavior: none;
+}

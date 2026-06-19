@@ -1,0 +1,11 @@
+[
+  {
+    "id": "world_default",
+    "name": "Default World",
+    "description": "Standard football world with major leagues",
+    "path": "/worlds/world_default.json",
+    "league_count": 10,
+    "team_count": 200,
+    "player_count": 4000
+  }
+]
