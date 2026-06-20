@@ -1,8 +1,8 @@
 [workspace]
 members = [
-  "src-tauri/crates/domain",
-  "src-tauri/crates/engine",
-  "src-tauri/crates/ofm_core",
-  "src/wasm/ofm_engine_wasm"
+  "crates/domain",
+  "crates/engine",
+  "crates/ofm_core",
+  "../src/wasm/ofm_engine_wasm"
 ]
 resolver = "2"

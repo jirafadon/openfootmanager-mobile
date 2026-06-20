@@ -1,3 +1,0 @@
-[workspace]
-members = ["ofm_engine_wasm"]
-resolver = "2"
