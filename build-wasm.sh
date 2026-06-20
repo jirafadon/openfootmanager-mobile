@@ -5,7 +5,7 @@ OUT_DIR="$ROOT_DIR/public/wasm"
 mkdir -p "$OUT_DIR"
 
 echo "🦀 Compilando Rust → WebAssembly..."
-# Ejecutamos wasm-pack desde el directorio del crate para evitar problemas de ruta
+# Ejecutamos wasm-pack desde el directorio del crate
 cd "$ROOT_DIR/src/wasm/ofm_engine_wasm"
 wasm-pack build \
   --target web \
@@ -14,6 +14,9 @@ wasm-pack build \
   --release \
   --no-typescript
 
-cd "$ROOT_DIR"
-rm -f "$OUT_DIR/package.json" "$OUT_DIR/.gitignore" "$OUT_DIR/README.md"
-echo "✅ Listo"
+# Limpiar archivos innecesarios de wasm-pack
+cd "$OUT_DIR"
+rm -f package.json .gitignore README.md
+
+echo "✅ Listo. Archivos generados en $OUT_DIR"
+ls -lh "$OUT_DIR"
