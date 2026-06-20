@@ -1,1 +1,0 @@
-ALTER TABLE game_meta ADD COLUMN vacant_team_days_json TEXT NOT NULL DEFAULT '{}';

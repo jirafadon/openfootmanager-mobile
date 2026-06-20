@@ -1,2 +1,0 @@
-ALTER TABLE teams ADD COLUMN media_json TEXT NOT NULL DEFAULT '{}';
-ALTER TABLE players ADD COLUMN media_json TEXT NOT NULL DEFAULT '{}';

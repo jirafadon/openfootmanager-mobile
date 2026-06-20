@@ -1,1 +1,0 @@
-ALTER TABLE managers ADD COLUMN warning_stage INTEGER NOT NULL DEFAULT 0;

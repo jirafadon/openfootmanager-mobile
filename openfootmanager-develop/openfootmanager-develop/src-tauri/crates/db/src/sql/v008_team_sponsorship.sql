@@ -1,2 +1,0 @@
-ALTER TABLE teams
-ADD COLUMN sponsorship TEXT NOT NULL DEFAULT 'null';

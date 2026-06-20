@@ -1,1 +1,0 @@
-ALTER TABLE players ADD COLUMN squad_role TEXT NOT NULL DEFAULT 'Senior';
