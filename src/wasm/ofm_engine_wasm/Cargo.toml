@@ -18,6 +18,9 @@ getrandom        = { version = "0.3", features = ["wasm_js"] }
 chrono           = { version = "0.4", features = ["serde", "wasmbind"] }
 log              = "0.4"
 console_log      = "1"
+# Necesario para que rand y uuid funcionen en WASM
+rand = { version = "0.10", features = ["small_rng"] }
+uuid = { version = "1.21.0", features = ["v4", "js"] }
 
 # Reutilizamos los crates puros de Rust sin modificar
 domain   = { path = "../../../src-tauri/crates/domain" }
