@@ -1,0 +1,7 @@
+node_modules/
+dist/
+src-tauri/target/
+src/wasm/ofm_engine_wasm/target/
+src/wasm/ofm_engine_wasm/pkg/
+.DS_Store
+*.log
