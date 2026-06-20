@@ -1,31 +1,15 @@
 #!/usr/bin/env bash
-# build-wasm.sh — Compile the Rust engine to WebAssembly
-#
-# Prerequisites:
-#   cargo install wasm-pack
-#   rustup target add wasm32-unknown-unknown
-#
-# Run from the project root (ofm-pwa/):
-#   chmod +x build-wasm.sh && ./build-wasm.sh
-
 set -euo pipefail
-
-WASM_CRATE="src/wasm/ofm_engine_wasm"
-OUT_DIR="public/wasm"
-
-echo "🦀 Building Rust → WebAssembly..."
-wasm-pack build \
-  "$WASM_CRATE" \
+OUT_DIR="$(pwd)/public/wasm"
+mkdir -p "$OUT_DIR"
+echo "🦀 Compilando Rust → WebAssembly..."
+cd src/wasm
+wasm-pack build ofm_engine_wasm \
   --target web \
-  --out-dir "../../../${OUT_DIR}" \
+  --out-dir "../../public/wasm" \
   --out-name "ofm_engine_wasm" \
   --release \
   --no-typescript
-
-echo "✅ WASM output → ${OUT_DIR}/"
-echo ""
-echo "Files generated:"
-ls -lh "$OUT_DIR"
-
-echo ""
-echo "🌐 You can now run: npm run dev"
+cd ../..
+rm -f "$OUT_DIR/package.json" "$OUT_DIR/.gitignore" "$OUT_DIR/README.md"
+echo "✅ Listo"
