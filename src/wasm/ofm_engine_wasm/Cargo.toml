@@ -1,7 +1,7 @@
 [package]
 name = "ofm_engine_wasm"
 version = "0.2.1"
-edition = "2024"
+edition = "2021"
 
 [lib]
 crate-type = ["cdylib"]
@@ -12,23 +12,20 @@ serde            = { version = "1", features = ["derive"] }
 serde_json       = "1"
 serde-wasm-bindgen = "0.6"
 console_error_panic_hook = "0.1"
-# getrandom con wasm_js es necesario para rand en WASM
-getrandom        = { version = "0.3", features = ["wasm_js"] }
-# chrono con wasmbind para Date.now() en el browser
-chrono           = { version = "0.4", features = ["serde", "wasmbind"] }
 log              = "0.4"
 console_log      = "1"
-# Necesario para que rand y uuid funcionen en WASM
-rand = { version = "0.10", features = ["small_rng"] }
-uuid = { version = "1.21.0", features = ["v4", "js"] }
 
-# Reutilizamos los crates puros de Rust sin modificar
+# Dependencias de los crates internos
 domain   = { path = "../../../src-tauri/crates/domain" }
 ofm_core = { path = "../../../src-tauri/crates/ofm_core" }
 engine   = { path = "../../../src-tauri/crates/engine" }
-# NOTA: el crate "db" (SQLite) es omitido intencionalmente.
-#       La persistencia la maneja IndexedDB en el lado JS.
+
+# Parches para compatibilidad WASM en dependencias transitivas
+getrandom = { version = "0.3", features = ["wasm_js"] }
+chrono    = { version = "0.4", features = ["serde", "wasmbind"] }
+rand      = { version = "0.10", features = ["small_rng"] }
+uuid      = { version = "1.21.0", features = ["v4", "js"] }
 
 [profile.release]
-opt-level = "s"  # Optimizar por tamaño (importante para WASM)
+opt-level = "s"
 lto = true

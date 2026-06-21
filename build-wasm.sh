@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
+# Asegurar que estamos en la raíz del proyecto
+cd "$(dirname "$0")"
 ROOT_DIR="$(pwd)"
 OUT_DIR="$ROOT_DIR/public/wasm"
+
 mkdir -p "$OUT_DIR"
 
-echo "🦀 Compilando Rust → WebAssembly..."
-# Ejecutamos wasm-pack desde el directorio del crate
+echo "🦀 Iniciando compilación Rust → WebAssembly..."
+
+# Compilar usando wasm-pack
+# Forzamos el directorio del crate para evitar ambigüedades
 cd "$ROOT_DIR/src/wasm/ofm_engine_wasm"
+
 wasm-pack build \
   --target web \
   --out-dir "$OUT_DIR" \
@@ -14,9 +21,10 @@ wasm-pack build \
   --release \
   --no-typescript
 
-# Limpiar archivos innecesarios de wasm-pack
+# Limpieza de artefactos de wasm-pack no necesarios para el despliegue
 cd "$OUT_DIR"
 rm -f package.json .gitignore README.md
 
-echo "✅ Listo. Archivos generados en $OUT_DIR"
+echo "✅ Compilación completada con éxito."
+echo "Archivos generados en public/wasm/:"
 ls -lh "$OUT_DIR"
